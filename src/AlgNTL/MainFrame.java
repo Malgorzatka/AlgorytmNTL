@@ -1,6 +1,7 @@
 package AlgNTL;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
@@ -17,6 +18,7 @@ public class MainFrame extends JFrame
     JMenuItem ntl;
     JMenuItem optimal;
     Graph graph;
+    Component graphDisplay;
     public MainFrame(String s)
     {
         super(s);
@@ -61,10 +63,7 @@ public class MainFrame extends JFrame
             public void actionPerformed(ActionEvent e) {
                 long time = graph.colorNTL();//dodalam czas wykonywania algorytmu
                 writeOutputFile("ntl_out.txt", time);//zmiana nazwy pliku wyjsciowego
-                self.add(GraphDisplay.GetGraphComponent(graph));
-                self.invalidate();
-                self.validate();
-                self.repaint();
+                self.updateGraph();
             }
         });
         ntl.setEnabled(false);
@@ -74,17 +73,22 @@ public class MainFrame extends JFrame
         optimal.addActionListener(e -> {
             long time = graph.optimalColor();
             writeOutputFile("optimal.txt", time);
-            self.add(GraphDisplay.GetGraphComponent(graph));
-            self.invalidate();
-            self.validate();
-            self.repaint();
+            self.updateGraph();
         });
         optimal.setEnabled(false);
         menu.add(optimal);
 
         setJMenuBar(menuBar);
+    }
 
-
+    public void updateGraph(){
+        if(graphDisplay != null)
+            remove(graphDisplay);
+        graphDisplay = GraphDisplay.GetGraphComponent(graph);
+        add(graphDisplay);
+        invalidate();
+        validate();
+        repaint();
     }
 
     private void writeOutputFile(String name, long time)
