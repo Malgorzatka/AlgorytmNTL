@@ -22,7 +22,7 @@ public class MainFrame extends JFrame
         super(s);
        // graph = null;
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(400,200);
+        setSize(800,600);
         setLocationRelativeTo(null);
         setMenu();
         setVisible(true);
@@ -54,14 +54,17 @@ public class MainFrame extends JFrame
             }
         });
         menu.add(selectFile);
-
+        MainFrame self = this;
         ntl = new JMenuItem("Algorytm NTL");
         ntl.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 long time = graph.colorNTL();//dodalam czas wykonywania algorytmu
                 writeOutputFile("ntl_out.txt", time);//zmiana nazwy pliku wyjsciowego
-
+                self.add(GraphDisplay.GetGraphComponent(graph));
+                self.invalidate();
+                self.validate();
+                self.repaint();
             }
         });
         ntl.setEnabled(false);
@@ -71,11 +74,17 @@ public class MainFrame extends JFrame
         optimal.addActionListener(e -> {
             long time = graph.optimalColor();
             writeOutputFile("optimal.txt", time);
+            self.add(GraphDisplay.GetGraphComponent(graph));
+            self.invalidate();
+            self.validate();
+            self.repaint();
         });
         optimal.setEnabled(false);
         menu.add(optimal);
 
         setJMenuBar(menuBar);
+
+
     }
 
     private void writeOutputFile(String name, long time)
