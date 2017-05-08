@@ -1,9 +1,7 @@
 package AlgNTL;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.TreeSet;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by Malgorzata on 2017-04-18.
@@ -769,6 +767,94 @@ public class Graph {
         // 100. KONIEC
     }
 
+    //<editor-fold desc="OptimalColoring">
+    public long optimalColor(){
+        long start = System.nanoTime();
+        int[] colors = getColorsArray();
+        for(Edge edge : edges)
+        {
+            edge.setColor(colors[edge.getId()]);
+        }
+        long end = System.nanoTime();
+        return end - start;
+    }
+
+    private int[] getColorsArray(){
+        int[] colors = new int[edges.size()];
+        int chromaticNumber = getDegree();
+        int instancesOfMaxColor = 0;
+        int i;
+        while (true)
+        {
+            //jezeli istnieje chociaz jedno kolorowanie o maksymalnym stopniu
+            if (instancesOfMaxColor != 0)
+            {
+                if (isColoringValid(colors))
+                {
+                    System.out.println(Arrays.toString(colors));
+                    return colors;
+                }
+            }
+            //inkrementacja licznika kolorowania
+            System.out.println(Arrays.toString(colors));
+            while (true)
+            {
+                for (i = 0; i < edges.size(); i++)
+                {
+                    colors[i]++;
+                    if (colors[i] == chromaticNumber - 1)
+                    {
+                        instancesOfMaxColor++;
+                    }
+                    if (colors[i] < chromaticNumber)
+                    {
+                        break;
+                    }
+                    colors[i] = 0;
+                    instancesOfMaxColor--;
+                }
+                //i bedzie wieksze rowne edges.size tylko gdy licznik przekroczy aklutalna maksymalna wartosc
+                if (i < edges.size())
+                {
+                    break;
+                }
+                //zwiekszenie podstawy
+                chromaticNumber++;
+            }
+        }
+    }
+
+    private boolean isColoringValid(int[] colors){
+        for(int i = 0; i < edges.size(); i++){
+            if (!areNeighboursCorrect(i, colors))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean areNeighboursCorrect(int index, int[] colors){
+        Edge edge = edges.get(index);
+        //wszystkie galezie sasiadujace z edge
+        List<Edge> neighbouringEdges = new ArrayList<>();
+        neighbouringEdges.addAll(edge.getV1().getIncidentEdges());
+        neighbouringEdges.addAll(edge.getV2().getIncidentEdges());
+
+        for(Edge neighbouringEdge : neighbouringEdges){
+            if(!canEdgesCooexist(edge,neighbouringEdge,colors)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean canEdgesCooexist(Edge first, Edge  second, int[] colors){
+        //jezeli maja to samo id lub rozne kolory to jest ok
+        return (first.getId() == second.getId()) || (colors[second.getId()] != colors[first.getId()]);
+    }
+
+    //</editor-fold>
 
     boolean test() {
         for (Vertex v : vertices) {

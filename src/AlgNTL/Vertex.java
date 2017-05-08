@@ -1,7 +1,7 @@
 package AlgNTL;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by Malgorzata on 2017-04-19.
@@ -98,4 +98,7 @@ public class Vertex
         setMissingColor(colorTmp);
     }
 
+    public Collection<Edge> getIncidentEdges(){
+        return incidentEdges.values();
+    }
 }

@@ -14,7 +14,8 @@ import java.nio.file.Paths;
  */
 public class MainFrame extends JFrame
 {
-    JMenu ntl;
+    JMenuItem ntl;
+    JMenuItem optimal;
     Graph graph;
     public MainFrame(String s)
     {
@@ -54,7 +55,7 @@ public class MainFrame extends JFrame
         });
         menu.add(selectFile);
 
-        JMenuItem ntl = new JMenuItem("Algorytm NTL");
+        ntl = new JMenuItem("Algorytm NTL");
         ntl.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -66,10 +67,15 @@ public class MainFrame extends JFrame
         ntl.setEnabled(false);
         menu.add(ntl);
 
-
+        optimal = new JMenuItem("Algorytm optymalny");
+        optimal.addActionListener(e -> {
+            long time = graph.optimalColor();
+            writeOutputFile("optimal.txt", time);
+        });
+        optimal.setEnabled(false);
+        menu.add(optimal);
 
         setJMenuBar(menuBar);
-
     }
 
     private void writeOutputFile(String name, long time)
@@ -145,6 +151,7 @@ public class MainFrame extends JFrame
 
                     }
                     ntl.setEnabled(true);
+                    optimal.setEnabled(true);
                 }
                 else  {
                     System.err.println("Bład przy parsowaniu pliku");
