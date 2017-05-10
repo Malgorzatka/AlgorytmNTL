@@ -97,6 +97,8 @@ public class Graph {
         return this.neighbourhoodMatrix;
     }
 
+    //<editor-fold desc="NTL">
+
     public long colorNC() {
         long lStartTime = System.nanoTime();
         int degree = getDegree(); //O(|V|)
@@ -767,13 +769,17 @@ public class Graph {
         // 100. KONIEC
     }
 
+    //</editor-fold>
+
     //<editor-fold desc="OptimalColoring">
     public long optimalColor(){
         long start = System.nanoTime();
         int[] colors = getColorsArray();
         for(Edge edge : edges)
         {
-            edge.setColor(colors[edge.getId()]);
+            //-1 bo id krawedzi od 1
+            //+1 bo kolory od 1
+            edge.setColor(colors[edge.getId()] + 1);
         }
         long end = System.nanoTime();
         return end - start;
