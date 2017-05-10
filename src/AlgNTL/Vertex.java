@@ -101,4 +101,43 @@ public class Vertex
     public Collection<Edge> getIncidentEdges(){
         return incidentEdges.values();
     }
+
+    public boolean hasNeighbout(Vertex vertex){
+        if(vertex == null){
+            return false;
+        }
+
+        for(Edge edge : incidentEdges.values()){
+            if(edge.getV1Id() == vertex.getId() || edge.getV2Id() == vertex.getId()){
+                return  true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Vertex vertex = (Vertex) o;
+
+        if (missingColor != vertex.missingColor) return false;
+        if (id != vertex.id) return false;
+        if (adjacencyList != null ? !adjacencyList.equals(vertex.adjacencyList) : vertex.adjacencyList != null)
+            return false;
+        if (incidentEdges != null ? !incidentEdges.equals(vertex.incidentEdges) : vertex.incidentEdges != null)
+            return false;
+        return missingColors != null ? missingColors.equals(vertex.missingColors) : vertex.missingColors == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = adjacencyList != null ? adjacencyList.hashCode() : 0;
+        result = 31 * result + (incidentEdges != null ? incidentEdges.hashCode() : 0);
+        result = 31 * result + (missingColors != null ? missingColors.hashCode() : 0);
+        result = 31 * result + missingColor;
+        result = 31 * result + id;
+        return result;
+    }
 }

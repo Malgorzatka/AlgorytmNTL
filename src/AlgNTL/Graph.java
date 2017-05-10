@@ -43,7 +43,6 @@ public class Graph {
             edges.add(e);
             vertices.get(v1).addNeigbour(vertices.get(v2), e);
             vertices.get(v2).addNeigbour(vertices.get(v1), e);
-
         }
     }
 
@@ -779,7 +778,7 @@ public class Graph {
         {
             //-1 bo id krawedzi od 1
             //+1 bo kolory od 1
-            edge.setColor(colors[edge.getId()] + 1);
+            edge.setColor(colors[edge.getId() -1 ] + 1);
         }
         long end = System.nanoTime();
         return end - start;

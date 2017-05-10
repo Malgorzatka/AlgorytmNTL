@@ -98,5 +98,27 @@ public class Edge
         }
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Edge edge = (Edge) o;
+
+        if (id != edge.id) return false;
+        if (color != edge.color) return false;
+        if (!v1.equals(edge.v1)) return false;
+        return v2.equals(edge.v2);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = v1.hashCode();
+        result = 31 * result + v2.hashCode();
+        result = 31 * result + id;
+        result = 31 * result + color;
+        return result;
+    }
 }
 

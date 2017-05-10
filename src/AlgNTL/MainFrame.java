@@ -75,13 +75,25 @@ public class MainFrame extends JFrame
             writeOutputFile("optimal.txt", time);
             self.updateGraph();
         });
+
         optimal.setEnabled(false);
         menu.add(optimal);
+
+        JMenuItem generator = new JMenuItem("Generator");
+        generator.addActionListener(e ->{
+            self.updateGraph(new GraphGenerator().generateGraph(5,9));
+        });
+        generator.setEnabled(true);
+;       menu.add(generator);
 
         setJMenuBar(menuBar);
     }
 
     public void updateGraph(){
+        updateGraph(graph);
+    }
+
+    public void updateGraph(Graph graph){
         if(graphDisplay != null)
             remove(graphDisplay);
         graphDisplay = GraphDisplay.GetGraphComponent(graph);
