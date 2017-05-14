@@ -1,6 +1,6 @@
-package AlgNTL.generator;
+package TalEdgeColoring.generator;
 
-import AlgNTL.graph.Vertex;
+import TalEdgeColoring.graph.Vertex;
 
 /**
  * Created by Jakub on 14.05.2017.

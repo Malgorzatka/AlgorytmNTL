@@ -1,7 +1,7 @@
-package AlgNTL.utils;
+package TalEdgeColoring.utils;
 
-import AlgNTL.graph.Edge;
-import AlgNTL.graph.Graph;
+import TalEdgeColoring.graph.Edge;
+import TalEdgeColoring.graph.Graph;
 
 import java.io.BufferedWriter;
 import java.io.File;

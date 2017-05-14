@@ -1,4 +1,4 @@
-package AlgNTL.gui;
+package TalEdgeColoring.gui;
 
 import javax.swing.*;
 

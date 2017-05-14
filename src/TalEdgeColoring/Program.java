@@ -1,6 +1,6 @@
-package AlgNTL;
+package TalEdgeColoring;
 
-import AlgNTL.gui.MainFrame;
+import TalEdgeColoring.gui.MainFrame;
 
 /**
  * Created by Jakub on 14.05.2017.

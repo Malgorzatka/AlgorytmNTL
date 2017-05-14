@@ -1,4 +1,4 @@
-package AlgNTL.graph;
+package TalEdgeColoring.graph;
 
 /**
  * Created by Malgorzata on 2017-04-19.

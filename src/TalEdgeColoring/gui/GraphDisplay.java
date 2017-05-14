@@ -1,8 +1,8 @@
-package AlgNTL.gui;
+package TalEdgeColoring.gui;
 
-import AlgNTL.graph.Edge;
-import AlgNTL.graph.Graph;
-import AlgNTL.graph.Vertex;
+import TalEdgeColoring.graph.Edge;
+import TalEdgeColoring.graph.Graph;
+import TalEdgeColoring.graph.Vertex;
 import com.mxgraph.layout.mxFastOrganicLayout;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.view.mxGraph;

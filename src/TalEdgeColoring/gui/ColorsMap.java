@@ -1,6 +1,5 @@
-package AlgNTL.gui;
+package TalEdgeColoring.gui;
 
-import java.awt.*;
 import java.util.HashMap;
 import java.util.Random;
 

@@ -1,8 +1,8 @@
-package AlgNTL.generator;
+package TalEdgeColoring.generator;
 
-import AlgNTL.graph.Edge;
-import AlgNTL.graph.Graph;
-import AlgNTL.graph.Vertex;
+import TalEdgeColoring.graph.Edge;
+import TalEdgeColoring.graph.Graph;
+import TalEdgeColoring.graph.Vertex;
 
 import java.util.*;
 

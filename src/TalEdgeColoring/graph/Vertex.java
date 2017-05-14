@@ -1,4 +1,4 @@
-package AlgNTL.graph;
+package TalEdgeColoring.graph;
 
 import java.util.*;
 

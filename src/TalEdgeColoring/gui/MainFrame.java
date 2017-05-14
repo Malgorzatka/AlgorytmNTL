@@ -1,9 +1,9 @@
-package AlgNTL.gui;
+package TalEdgeColoring.gui;
 
-import AlgNTL.graph.Graph;
-import AlgNTL.generator.GraphGenerator;
-import AlgNTL.utils.FileGraphReader;
-import AlgNTL.utils.FileGraphWriter;
+import TalEdgeColoring.graph.Graph;
+import TalEdgeColoring.generator.GraphGenerator;
+import TalEdgeColoring.utils.FileGraphReader;
+import TalEdgeColoring.utils.FileGraphWriter;
 
 import javax.swing.*;
 import java.awt.*;
