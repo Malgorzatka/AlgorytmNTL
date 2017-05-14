@@ -26,7 +26,7 @@ public class GraphGenerator {
         createAllConnections(vertexNumber, vertexes, edges);
 
         if (edges.size() > edgeNumber) {
-            removeEdges(edges, vertexes, edgeNumber, 0);//maxDegree);
+            removeEdges(edges, vertexes, edgeNumber);
         }
 
         //usniecie tymczasowych danych dodanych podczas generowania grafu
@@ -34,6 +34,7 @@ public class GraphGenerator {
             v.getIncidentEdges().clear();
             v.getAdjacencyList().clear();
         }
+
         for (int i = 0; i < edges.size(); i++) {
             Edge e = edges.get(i);
             graph.addEdge(e.getV1Id(), e.getV2Id(), i);
@@ -55,7 +56,6 @@ public class GraphGenerator {
                 }
             }
         }
-        ;
     }
 
     private boolean canAddEdge(int i, int j, List<Vertex> vertexes, List<Edge> edges) {
@@ -71,7 +71,7 @@ public class GraphGenerator {
         return num == 0;
     }
 
-    private void removeEdges(List<Edge> edges, List<Vertex> vertexs, int edgeNumber, int maxDegree) {
+    private void removeEdges(List<Edge> edges, List<Vertex> vertexs, int edgeNumber) {
         List<Edge> possibleEdges = new ArrayList<>(edges);
         while (edges.size() != edgeNumber) {
             int index = rand.nextInt(possibleEdges.size());

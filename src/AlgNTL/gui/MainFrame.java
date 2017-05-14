@@ -83,9 +83,12 @@ public class MainFrame extends JFrame {
 
         JMenuItem generator = new JMenuItem("Generator");
         generator.addActionListener(e -> {
-            self.updateGraph(new GraphGenerator().generateGraph(5, 8));
-            ntl.setEnabled(true);
-            optimal.setEnabled(true);
+            GeneratorOptionsResponse response =  GeneratorOptionsDialog.ShowDialog();
+            if(response != null){
+                self.updateGraph(new GraphGenerator().generateGraph(response.getVertexNumber(), response.getEdgeNumber()));
+                ntl.setEnabled(true);
+                optimal.setEnabled(true);
+            }
         });
         generator.setEnabled(true);
         menu.add(generator);
