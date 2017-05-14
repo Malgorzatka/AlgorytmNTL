@@ -857,12 +857,7 @@ public class Graph {
     private boolean canEdgesCooexist(Edge first, Edge  second, int[] colors){
         //jezeli maja to samo id lub rozne kolory to jest ok
         //-1 bo id od 1
-        try {
-            return (first.getId() == second.getId()) || (colors[second.getId() - 1] != colors[first.getId() -1]);
-        }
-        catch(Exception e){
-            return false;
-        }
+        return (first.getId() == second.getId()) || (colors[second.getId() - 1] != colors[first.getId() -1]);
     }
 
     //</editor-fold>
