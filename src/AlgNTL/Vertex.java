@@ -31,6 +31,11 @@ public class Vertex
         incidentEdges.put(v.getId(), e);
         return adjacencyList.add(v) ;
     }
+
+    public void removeNeigbout(Vertex v){
+        incidentEdges.remove(v.getId());
+        adjacencyList.remove(v);
+    }
     /**
      *
      * @param neighbour
@@ -133,8 +138,7 @@ public class Vertex
 
     @Override
     public int hashCode() {
-        int result = adjacencyList != null ? adjacencyList.hashCode() : 0;
-        result = 31 * result + (incidentEdges != null ? incidentEdges.hashCode() : 0);
+        int result = 17;
         result = 31 * result + (missingColors != null ? missingColors.hashCode() : 0);
         result = 31 * result + missingColor;
         result = 31 * result + id;

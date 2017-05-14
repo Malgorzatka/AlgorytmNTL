@@ -1,5 +1,8 @@
 package AlgNTL;
 
+import AlgNTL.generator.GraphGenerator;
+import AlgNTL.generator.GraphTraverseChecker;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,30 +16,28 @@ import java.nio.file.Paths;
 /**
  * Created by Malgorzata on 2017-04-17.
  */
-public class MainFrame extends JFrame
-{
+public class MainFrame extends JFrame {
     JMenuItem ntl;
     JMenuItem optimal;
     Graph graph;
     Component graphDisplay;
-    public MainFrame(String s)
-    {
+
+    public MainFrame(String s) {
         super(s);
-       // graph = null;
+        // graph = null;
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800,600);
+        setSize(800, 600);
         setLocationRelativeTo(null);
         setMenu();
         setVisible(true);
     }
 
-    private void setMenu()
-    {
+    private void setMenu() {
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("Plik");
         menuBar.add(menu);
 
-        JMenuItem selectFile= new JMenuItem("Wybierz plik wejściowy");
+        JMenuItem selectFile = new JMenuItem("Wybierz plik wejściowy");
         selectFile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -49,7 +50,7 @@ public class MainFrame extends JFrame
 
                 chooser.setCurrentDirectory(new File(s));
                 int returnVal = chooser.showOpenDialog(chooser);
-                if(returnVal == JFileChooser.APPROVE_OPTION) {
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
                     File file = chooser.getSelectedFile();
                     readFile(file);
                 }
@@ -80,31 +81,33 @@ public class MainFrame extends JFrame
         menu.add(optimal);
 
         JMenuItem generator = new JMenuItem("Generator");
-        generator.addActionListener(e ->{
-            self.updateGraph(new GraphGenerator().generateGraph(5,9));
+        generator.addActionListener(e -> {
+            self.updateGraph(new GraphGenerator().generateGraph(5, 8));
+            ntl.setEnabled(true);
+            optimal.setEnabled(true);
         });
         generator.setEnabled(true);
-;       menu.add(generator);
+        menu.add(generator);
 
         setJMenuBar(menuBar);
     }
 
-    public void updateGraph(){
+    public void updateGraph() {
         updateGraph(graph);
     }
 
-    public void updateGraph(Graph graph){
-        if(graphDisplay != null)
+    public void updateGraph(Graph graph) {
+        if (graphDisplay != null)
             remove(graphDisplay);
         graphDisplay = GraphDisplay.GetGraphComponent(graph);
         add(graphDisplay);
+        this.graph = graph;
         invalidate();
         validate();
         repaint();
     }
 
-    private void writeOutputFile(String name, long time)
-    {
+    private void writeOutputFile(String name, long time) {
         Path currentRelativePath = Paths.get("");
         String s = currentRelativePath.toAbsolutePath().toString() + "\\" + name;
         //System.out.println(s);
@@ -112,62 +115,57 @@ public class MainFrame extends JFrame
         if (!file.exists()) {
             try {
                 file.createNewFile();
-            }
-            catch(IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
         try {
             FileWriter fw = new FileWriter(file.getAbsoluteFile());
             BufferedWriter bw = new BufferedWriter(fw);
-            bw.write("VNUMBER\t" + graph.getVerticesSize()+"\n" );
+            bw.write("VNUMBER\t" + graph.getVerticesSize() + "\n");
             for (Edge e : graph.getEdges())
                 bw.write("EDGE\t" + e.getId() + "\t" + e.getV1Id() + "\t" + e.getV2Id() + "\t" + e.getColor() + "\n");
             bw.write("COL_NUM" + "\t" + graph.getColorNum() + "\n");
             bw.write("DEGREE\t" + graph.getDegree() + "\n"); //dla porownania liczby kolorow do stopnia grafu
             bw.write("TIME\t" + time + "\n"); //nanosekund
             bw.close();
-        }
-        catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void readFile(File file)
-    {
+    private void readFile(File file) {
         try { //analizowanie pliku wejsciowego
             Scanner scanner = new Scanner(file);
             graph = new Graph();
-            if(scanner.hasNext()) {
-                if(scanner.next().equals("VNUMBER")) { //najpierw liczba wierzchlokow
+            if (scanner.hasNext()) {
+                if (scanner.next().equals("VNUMBER")) { //najpierw liczba wierzchlokow
                     int vnumber = scanner.nextInt();
                     graph.addVertices(vnumber);
 
                     // wypelniam macierz sasiedztwa zerami
                     // rozmiar macierzy vnumber x vnumber
 
-                    for(int i=0; i<vnumber; i++)
-                    {
+                    for (int i = 0; i < vnumber; i++) {
                         ArrayList<Integer> temp = new ArrayList<Integer>();
-                        for(int j=0; j<vnumber; j++)
-                        {
+                        for (int j = 0; j < vnumber; j++) {
                             temp.add(0);
                         }
                         graph.getNeighbourhoodMatrix().add(temp);
                     }
 
-                    while(scanner.hasNext()) {
-                        if(scanner.next().equals("EDGE")) { //wczytywanie krawedzi
+                    while (scanner.hasNext()) {
+                        if (scanner.next().equals("EDGE")) { //wczytywanie krawedzi
                             int id = scanner.nextInt();
                             int idV1 = scanner.nextInt();
                             int idV2 = scanner.nextInt();
                             boolean tmp = false;
                             for (Edge e : graph.getEdges()) {
-                                if((e.getV1().getId() == idV1 && e.getV2().getId() == idV2) || (e.getV1().getId() == idV2 && e.getV2().getId() == idV1)) {
+                                if ((e.getV1().getId() == idV1 && e.getV2().getId() == idV2) || (e.getV1().getId() == idV2 && e.getV2().getId() == idV1)) {
                                     tmp = true;
                                 }
                             }
-                            if(idV1 != idV2 || tmp)
+                            if (idV1 != idV2 || tmp)
                                 graph.addEdge(idV1, idV2, id);
                             else
                                 System.out.println("To ma byc graf prosty");
@@ -177,22 +175,19 @@ public class MainFrame extends JFrame
                     }
                     ntl.setEnabled(true);
                     optimal.setEnabled(true);
-                }
-                else  {
+                } else {
                     System.err.println("Bład przy parsowaniu pliku");
                 }
 
             }
             scanner.close();
 
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    public static void main (String[] args)
-    {
+    public static void main(String[] args) {
         MainFrame mf = new MainFrame("Edge Coloring");
     }
 }
