@@ -1,7 +1,6 @@
-package AlgNTL;
+package AlgNTL.graph;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Created by Malgorzata on 2017-04-19.

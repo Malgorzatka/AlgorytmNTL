@@ -1,4 +1,4 @@
-package AlgNTL;
+package AlgNTL.gui;
 
 import java.awt.*;
 import java.util.HashMap;

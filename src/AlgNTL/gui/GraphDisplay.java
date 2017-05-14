@@ -1,15 +1,13 @@
-package AlgNTL;
+package AlgNTL.gui;
 
+import AlgNTL.graph.Edge;
+import AlgNTL.graph.Graph;
+import AlgNTL.graph.Vertex;
 import com.mxgraph.layout.mxFastOrganicLayout;
-import com.mxgraph.layout.mxOrganicLayout;
 import com.mxgraph.swing.mxGraphComponent;
-import com.mxgraph.util.mxConstants;
-import com.mxgraph.view.mxEdgeStyle;
 import com.mxgraph.view.mxGraph;
 
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /*

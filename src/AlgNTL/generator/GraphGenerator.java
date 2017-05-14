@@ -1,11 +1,10 @@
 package AlgNTL.generator;
 
-import AlgNTL.Edge;
-import AlgNTL.Graph;
-import AlgNTL.Vertex;
+import AlgNTL.graph.Edge;
+import AlgNTL.graph.Graph;
+import AlgNTL.graph.Vertex;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Created by Jakub on 10.05.2017.
@@ -37,9 +36,8 @@ public class GraphGenerator {
         }
         for (int i = 0; i < edges.size(); i++) {
             Edge e = edges.get(i);
-            graph.addEdge(e.getV1Id(), e.getV2Id(), i + 1);
+            graph.addEdge(e.getV1Id(), e.getV2Id(), i);
         }
-        System.out.println("set :" + edgeNumber + "got :" + graph.getEdges().size());
         return graph;
     }
 
@@ -84,7 +82,6 @@ public class GraphGenerator {
                 Vertex v2 = edge.getV2();
                 v1.removeNeigbout(v2);
                 v2.removeNeigbout(v1);
-                System.out.println("Removed: " + edge.getId() + "(" + edge.getV1Id() + ", " + edge.getV2Id() + ")");
             }
             possibleEdges.remove(index);
         }
@@ -92,15 +89,7 @@ public class GraphGenerator {
 
 
     private boolean canRemoveEdge(Edge edge, List<Vertex> vertexes) {
-        //return  true;
-        System.out.println();
-        System.out.println("Remove Test " + edge.getId());
-        System.out.println(edge.getV1Id() + " " + edge.getV2Id());
-        boolean can = new GraphTraverseChecker().canTraverseWithout(edge.getV1(), vertexes.size(), edge.getId());
-
-        System.out.println("\t\tRemove Test End " + can);
-        System.out.println();
-        return can;
+        return new GraphTraverseChecker().canTraverseWithout(edge.getV1(), vertexes.size(), edge.getId());
     }
 }
 

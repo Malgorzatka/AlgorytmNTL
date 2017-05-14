@@ -1,7 +1,6 @@
-package AlgNTL;
+package AlgNTL.graph;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Created by Malgorzata on 2017-04-18.
@@ -778,7 +777,7 @@ public class Graph {
         {
             //-1 bo id krawedzi od 1
             //+1 bo kolory od 1
-            edge.setColor(colors[edge.getId() -1 ] + 1);
+            edge.setColor(colors[edge.getId()] + 1);
         }
         long end = System.nanoTime();
         return end - start;
@@ -856,8 +855,7 @@ public class Graph {
 
     private boolean canEdgesCooexist(Edge first, Edge  second, int[] colors){
         //jezeli maja to samo id lub rozne kolory to jest ok
-        //-1 bo id od 1
-        return (first.getId() == second.getId()) || (colors[second.getId() - 1] != colors[first.getId() -1]);
+        return (first.getId() == second.getId()) || (colors[second.getId()] != colors[first.getId()]);
     }
 
     //</editor-fold>

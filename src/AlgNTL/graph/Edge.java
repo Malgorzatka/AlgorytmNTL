@@ -1,4 +1,4 @@
-package AlgNTL;
+package AlgNTL.graph;
 
 /**
  * Created by Malgorzata on 2017-04-19.

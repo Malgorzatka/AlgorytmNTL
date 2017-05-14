@@ -1,6 +1,6 @@
 package AlgNTL.generator;
 
-import AlgNTL.Vertex;
+import AlgNTL.graph.Vertex;
 
 /**
  * Created by Jakub on 14.05.2017.
