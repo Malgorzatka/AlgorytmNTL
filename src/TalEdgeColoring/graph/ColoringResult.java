@@ -20,7 +20,7 @@ public class ColoringResult {
 
     @Override
     public String toString(){
-        return chromaticIndex + ";" + time + ";" + memory + System.getProperty("line.separator");
+        return chromaticIndex + ";" + time + ";" + memory;
     }
 
     public void setChromaticIndex(int chromaticIndex) {
