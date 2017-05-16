@@ -39,6 +39,13 @@ public class GraphGenerator {
             Edge e = edges.get(i);
             graph.addEdge(e.getV1Id(), e.getV2Id(), i);
         }
+        for (int i = 0; i < vertexNumber; i++) {
+            ArrayList<Integer> temp = new ArrayList<Integer>();
+            for (int j = 0; j < vertexNumber; j++) {
+                temp.add(0);
+            }
+            graph.getNeighbourhoodMatrix().add(temp);
+        }
         return graph;
     }
 
