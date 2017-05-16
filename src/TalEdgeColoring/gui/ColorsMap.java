@@ -10,6 +10,7 @@ public class ColorsMap extends HashMap<Integer,String> {
     private static  final Random rand = new Random();
 
     public ColorsMap(){
+        this.put (0, "0x232C16");
         this.put (1, "0xFFB300");
         this.put (2, "0x803E75");
         this.put (3, "0xFF6800");
@@ -29,7 +30,6 @@ public class ColorsMap extends HashMap<Integer,String> {
         this.put (17, "0x93AA00");
         this.put (18, "0x593315");
         this.put (19, "0xF13A13");
-        this.put (20, "0x232C16");
     }
 
     @Override

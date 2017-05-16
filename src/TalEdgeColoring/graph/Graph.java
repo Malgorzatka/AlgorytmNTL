@@ -612,12 +612,10 @@ public class Graph {
             {
                 if (isColoringValid(colors))
                 {
-                    System.out.println(Arrays.toString(colors));
                     return colors;
                 }
             }
             //inkrementacja licznika kolorowania
-            System.out.println(Arrays.toString(colors));
             while (true)
             {
                 for (i = 0; i < edges.size(); i++)
