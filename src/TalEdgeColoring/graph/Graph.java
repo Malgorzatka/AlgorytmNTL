@@ -770,17 +770,21 @@ public class Graph {
     //</editor-fold>
 
     //<editor-fold desc="OptimalColoring">
-    public long optimalColor(){
+    public ColoringResult optimalColor(){
         long start = System.nanoTime();
         int[] colors = getColorsArray();
+        int maxColor = 0;
         for(Edge edge : edges)
         {
-            //-1 bo id krawedzi od 1
             //+1 bo kolory od 1
-            edge.setColor(colors[edge.getId()] + 1);
+            int color = colors[edge.getId()] + 1;
+            edge.setColor(color);
+            if(color > maxColor){
+                maxColor = color;
+            }
         }
         long end = System.nanoTime();
-        return end - start;
+        return new ColoringResult(maxColor, end - start, 123);
     }
 
     private int[] getColorsArray(){

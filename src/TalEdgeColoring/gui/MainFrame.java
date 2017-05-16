@@ -73,7 +73,7 @@ public class MainFrame extends JFrame {
 
         optimal = new JMenuItem("Algorytm optymalny");
         optimal.addActionListener(e -> {
-            long time = graph.optimalColor();
+            long time = graph.optimalColor().getTime();
             writeOutputFile("optimal.txt", time);
             self.updateGraph();
         });
