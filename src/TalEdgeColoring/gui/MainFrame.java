@@ -61,6 +61,7 @@ public class MainFrame extends JFrame {
         MainFrame self = this;
         ntl = new JMenuItem("Algorytm NTL");
         ntl.addActionListener(e -> {
+            graph = graph.getGraphUncoloredClone();
             ColoringResult result = graph.colorNTL();//dodalam czas wykonywania algorytmu
             writeOutputFile("ntl_out.txt", result);//zmiana nazwy pliku wyjsciowego
             self.updateGraph();
@@ -70,6 +71,7 @@ public class MainFrame extends JFrame {
 
         optimal = new JMenuItem("Algorytm optymalny");
         optimal.addActionListener(e -> {
+            graph = graph.getGraphUncoloredClone();
             ColoringResult result = graph.optimalColor();
             writeOutputFile("optimal.txt", result);
             self.updateGraph();

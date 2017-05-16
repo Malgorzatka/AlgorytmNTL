@@ -677,4 +677,20 @@ public class Graph {
 
     //</editor-fold>
 
+    public Graph getGraphUncoloredClone(){
+        int vertexNumber = vertices.size();
+        Graph graph = new Graph();
+        graph.addVertices(vertexNumber);
+        for(Edge edge: edges){
+            graph.addEdge(edge.getV1Id(),edge.getV2Id(),edge.getId());
+        }
+        for (int i = 0; i < vertexNumber; i++) {
+            ArrayList<Integer> temp = new ArrayList<Integer>();
+            for (int j = 0; j < vertexNumber; j++) {
+                temp.add(0);
+            }
+            graph.getNeighbourhoodMatrix().add(temp);
+        }
+        return graph;
+    }
 }
