@@ -5,10 +5,6 @@ import TalEdgeColoring.graph.ColoringResult;
 import TalEdgeColoring.graph.Graph;
 import TalEdgeColoring.gui.MainFrame;
 
-import java.io.BufferedWriter;
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;

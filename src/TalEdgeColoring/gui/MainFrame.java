@@ -1,5 +1,6 @@
 package TalEdgeColoring.gui;
 
+import TalEdgeColoring.graph.ColoringResult;
 import TalEdgeColoring.graph.Graph;
 import TalEdgeColoring.generator.GraphGenerator;
 import TalEdgeColoring.utils.FileGraphReader;
@@ -25,7 +26,6 @@ public class MainFrame extends JFrame {
 
     public MainFrame(String s) {
         super(s);
-        // graph = null;
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
         setLocationRelativeTo(null);
@@ -60,21 +60,18 @@ public class MainFrame extends JFrame {
         menu.add(selectFile);
         MainFrame self = this;
         ntl = new JMenuItem("Algorytm NTL");
-        ntl.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                long time = graph.colorNTL();//dodalam czas wykonywania algorytmu
-                writeOutputFile("ntl_out.txt", time);//zmiana nazwy pliku wyjsciowego
-                self.updateGraph();
-            }
+        ntl.addActionListener(e -> {
+            ColoringResult result = graph.colorNTL();//dodalam czas wykonywania algorytmu
+            writeOutputFile("ntl_out.txt", result);//zmiana nazwy pliku wyjsciowego
+            self.updateGraph();
         });
         ntl.setEnabled(false);
         menu.add(ntl);
 
         optimal = new JMenuItem("Algorytm optymalny");
         optimal.addActionListener(e -> {
-            long time = graph.optimalColor().getTime();
-            writeOutputFile("optimal.txt", time);
+            ColoringResult result = graph.optimalColor();
+            writeOutputFile("optimal.txt", result);
             self.updateGraph();
         });
 
@@ -83,8 +80,8 @@ public class MainFrame extends JFrame {
 
         JMenuItem generator = new JMenuItem("Generator");
         generator.addActionListener(e -> {
-            GeneratorOptionsResponse response =  GeneratorOptionsDialog.ShowDialog();
-            if(response != null){
+            GeneratorOptionsResponse response = GeneratorOptionsDialog.ShowDialog();
+            if (response != null) {
                 self.updateGraph(new GraphGenerator().generateGraph(response.getVertexNumber(), response.getEdgeNumber()));
                 ntl.setEnabled(true);
                 optimal.setEnabled(true);
@@ -111,13 +108,13 @@ public class MainFrame extends JFrame {
         repaint();
     }
 
-    private void writeOutputFile(String name, long time) {
-        new FileGraphWriter().writeOutputFile(name,time,graph);
+    private void writeOutputFile(String name, ColoringResult result) {
+        new FileGraphWriter().writeOutputFile(name, result, graph);
     }
 
     private void readFile(File file) {
         Graph graph = new FileGraphReader().readGraph(file);
-        if(graph != null){
+        if (graph != null) {
             updateGraph(graph);
             ntl.setEnabled(true);
             optimal.setEnabled(true);

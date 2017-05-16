@@ -102,11 +102,10 @@ public class Graph {
      *
      * @return ile nanosekund trwalo wykonywanie algorytmu
      */
-    public long colorNTL() {
-
+    public ColoringResult colorNTL() {
+        ColoringResult result;
         long lStartTime = System.nanoTime();
         int degree = getDegree(); //O(|V|)
-        //Collections.shuffle(edges); // ustawienie krawedzi w losowej kolejnosci,
         // O(|E|)
         if (degree <= 2) {
             colorNC();
@@ -145,9 +144,9 @@ public class Graph {
         }
 
         if (!test())
-            return -1;
-
-        return difference;
+            return null;
+        result = new ColoringResult(colorNum, difference, 123);
+        return result;
     }
 
     public long colorNC() {
