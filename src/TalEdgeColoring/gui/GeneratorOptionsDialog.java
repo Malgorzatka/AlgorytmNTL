@@ -37,6 +37,7 @@ public class GeneratorOptionsDialog {
                 }
             } else {
                 ok = true;
+                resp = null;
             }
         }
         return resp;
@@ -48,7 +49,7 @@ class GeneratorOptionsResponse {
     private int edgeNumber = -1;
 
     public boolean isCorrect() {
-        return vertexNumber > 0 && edgeNumber > 0 && (edgeNumber <= vertexNumber - 1);
+        return vertexNumber > 0 && edgeNumber > 0 && (edgeNumber >= vertexNumber - 1);
     }
 
     public int getVertexNumber() {
