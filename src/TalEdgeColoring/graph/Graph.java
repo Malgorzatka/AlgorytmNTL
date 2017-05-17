@@ -612,7 +612,7 @@ public class Graph {
         while (true)
         {
             //jezeli istnieje chociaz jedno kolorowanie o maksymalnym stopniu
-            if (instancesOfMaxColor != 0)
+            if (instancesOfMaxColor != 0 || chromaticNumber == 1)
             {
                 if (isColoringValid(colors))
                 {
