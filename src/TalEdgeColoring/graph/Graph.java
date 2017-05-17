@@ -1,5 +1,7 @@
 package TalEdgeColoring.graph;
 
+import TalEdgeColoring.MemoryHelper;
+
 import java.util.*;
 
 /**
@@ -103,7 +105,8 @@ public class Graph {
      * @return ile nanosekund trwalo wykonywanie algorytmu
      */
     public ColoringResult colorNTL() {
-        ColoringResult result;
+        MemoryHelper memoryHelper = new MemoryHelper();
+        memoryHelper.resetPeak();
         long lStartTime = System.nanoTime();
         int degree = getDegree(); //O(|V|)
         // O(|E|)
@@ -135,6 +138,7 @@ public class Graph {
         }
         long lEndTime = System.nanoTime();
         long difference = lEndTime - lStartTime;
+        long memory = memoryHelper.getPeakUsage();
 
         //sprawdzenie, jaki jest najwiekszy kolor
         colorNum = 0;
@@ -145,8 +149,8 @@ public class Graph {
 
         if (!test())
             return null;
-        result = new ColoringResult(colorNum, difference, 123);
-        return result;
+
+        return new ColoringResult(colorNum, difference, memory);
     }
 
     public long colorNC() {
@@ -584,6 +588,8 @@ public class Graph {
 
     //<editor-fold desc="OptimalColoring">
     public ColoringResult optimalColor(){
+        MemoryHelper memoryHelper = new MemoryHelper();
+        memoryHelper.resetPeak();
         long start = System.nanoTime();
         int[] colors = getColorsArray();
         int maxColor = 0;
@@ -597,7 +603,8 @@ public class Graph {
             }
         }
         long end = System.nanoTime();
-        return new ColoringResult(maxColor, end - start, 123);
+        long memory = memoryHelper.getPeakUsage();
+        return new ColoringResult(maxColor, end - start, memory);
     }
 
     private int[] getColorsArray(){
