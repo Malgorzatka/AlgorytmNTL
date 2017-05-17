@@ -48,6 +48,9 @@ public class Program {
                     graph = graph.getGraphUncoloredClone();
                     saveNTLResult(";ntl;", fileName, graph, true);
                 }
+                else{
+                    System.out.println("zle parametry wejsciowe wpisz opt/ntl/comapre liczbaWierzcholkuw liczbaKrawedzi");
+                }
                 return;
             }
         } catch (Exception e) {
