@@ -39,19 +39,21 @@ public class Program {
                 saveGraph(graph,guid);
                 if(mode.equals("opt")){
                     saveOptimalResult(info + "opt;", fileName, graph, true);
+                    return;
                 }
                 else if(mode.equals("ntl")){
                     saveNTLResult(info + "ntl;", fileName, graph, true);
+                    return;
                 }
                 else if(mode.equals("compare")){
                     saveOptimalResult(info + "opt;", fileName, graph, false);
                     graph = graph.getGraphUncoloredClone();
                     saveNTLResult(";ntl;", fileName, graph, true);
+                    return;
                 }
                 else{
                     System.out.println("zle parametry wejsciowe wpisz opt/ntl/comapre liczbaWierzcholkuw liczbaKrawedzi");
                 }
-                return;
             }
         } catch (Exception e) {
             try {
