@@ -190,9 +190,6 @@ public class Graph {
             }
             if (colors.size() != v.getAdjacencyList().size()) {
                 System.out.println("ERROR " + v.getId() + " " + v.getAdjacencyList().size() + " " + colors.size());
-			/*for ( int i = 0; i < v.getAdjacencyList().size(); ++ i) {
-				System.out.println(v.getAdjacencyList().get(i).getId() + " " + v.getEdge(v.getAdjacencyList().get(i).getId()).getColor());
-			}*/
                 return false;
             }
         }
