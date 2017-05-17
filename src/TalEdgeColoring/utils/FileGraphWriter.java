@@ -37,12 +37,8 @@ public class FileGraphWriter {
                 bw.write("COL_NUM\t" + result.getChromaticIndex() + "\n");
                 bw.write("TIME\t" + result.getTime() + "\n"); //nanosekund
                 bw.write("MEM\t" + result.getMemory() + "\n");
-                bw.close();
             }
-            else{
-                bw.write("Error");
-                bw.close();
-            }
+            bw.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
